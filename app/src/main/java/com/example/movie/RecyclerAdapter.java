@@ -34,7 +34,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Recycl
         String title = list.get(i).getTitle();
         recyclerViewHolder.txtTitle.setText("title: "+title);
         String year = list.get(i).getYear();
-        recyclerViewHolder.txtYear.setText("production year:"+year);
+        recyclerViewHolder.txtYear.setText("production year: "+year);
         String posterURL = list.get(i).getPoster();
         Picasso.get().load(posterURL).into(recyclerViewHolder.imgPoster);
 

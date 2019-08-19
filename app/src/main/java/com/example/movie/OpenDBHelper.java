@@ -39,6 +39,11 @@ public class OpenDBHelper extends SQLiteOpenHelper {
 
     public void addData(List<Search> search) {
         SQLiteDatabase db = this.getWritableDatabase();
+        for(int j = 0; j < search.size(); j++) {
+            if(search.get(j).getTitle().contains("'")){
+                search.get(j).setTitle(search.get(j).getTitle().replaceAll("'","''"));
+            }
+        }
         for (int i = 0; i < search.size(); i++) {
             String insertQuery = "INSERT INTO " + TABLE_NAME +
                     "(" + COL_2 + "," + COL_3 + "," + COL_4 + ")" +
