@@ -56,7 +56,7 @@ public class OpenDBHelper extends SQLiteOpenHelper {
     }
 
     public List<Search> getData(String s){
-        String GET_DATA_QUERY = "SELECT TITLE,YEAR,POSTER FROM " + TABLE_NAME+" WHERE TITLE LIKE '%"+
+        String GET_DATA_QUERY = "SELECT DISTINCT TITLE,YEAR,POSTER FROM " + TABLE_NAME+" WHERE TITLE LIKE '%"+
                 s+"%'";
 
         List<Search> search = new ArrayList<>();
