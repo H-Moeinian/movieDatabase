@@ -21,6 +21,7 @@ import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity {
     OpenDBHelper db;
+    List<Search> search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         db = new OpenDBHelper(this);
         final EditText edtName = findViewById(R.id.edtName);
         Button btnSearch = findViewById(R.id.btnSearch);
+        Button btnSave = findViewById(R.id.btnSave);
+
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,8 +45,7 @@ public class MainActivity extends AppCompatActivity {
                                 Gson gson = new Gson();
                                 MovieInformation  movieInformation = gson.fromJson(response.toString(),MovieInformation.class);
 
-                                List<Search>  search = movieInformation.getSearch();
-                                db.addData(search);
+                                search = movieInformation.getSearch();
                                 RecyclerAdapter adapter = new RecyclerAdapter(search);
                                 recyclerView.setAdapter(adapter);
                                 recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this,
@@ -57,6 +59,14 @@ public class MainActivity extends AppCompatActivity {
                                 super.onFailure(statusCode, headers, throwable, errorResponse);
                             }
                         });
+            }
+        });
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(search != null){
+                    db.addData(search);
+                }
             }
         });
 
